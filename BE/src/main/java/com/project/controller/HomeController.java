@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,32 +13,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.entity.Movie;
-import com.project.service.MovieService;
+import com.project.entity.Admin;
+import com.project.entity.Credentials;
+import com.project.service.AdminService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/movies")
+// @RequestMapping("/login")
 @CrossOrigin
-public class MovieController {
+public class HomeController {
 	
 	@Autowired
-	private MovieService movieService;
+	private AdminService adminService;
 	
-	@GetMapping("/all")
-	public List<Movie> getAllMovies(){
-		return movieService.getAllMovies();
+	@PostMapping("/admin")
+	public String validateAdmin(@RequestBody Credentials admin){
+		System.out.println("Adminname: "+admin.getName());
+		System.out.println("Adminpassword: "+admin.getPassword());
+		return "XXX";
 	}
-	
-	@GetMapping("/{mid}")
-	public Optional<Movie> getMovieById(@PathVariable String mid){
-		return movieService.getMovieById(mid);
-	}
-	
-	@PostMapping("/add")
-	public String addMovie(@RequestBody Movie movie) {
-		movieService.addMovie(movie);
-		return "YYY";
-	}
-	
 
 }

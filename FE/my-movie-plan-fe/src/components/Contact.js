@@ -9,6 +9,7 @@ export default function Contact() {
         <p></p>
         <p>Adress: XXX, Pune, India</p>
         <p></p>
+        <p></p>
         <h5>For More Info</h5>
         <p>E-mail: info@mmp.com</p>
         <p>Phone Number: 555 555 555</p>

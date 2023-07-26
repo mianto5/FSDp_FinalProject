@@ -2,11 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
- 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#C20605"}}>
+    <nav
+      className="navbar navbar-expand-lg navbar-light"
+      style={{ backgroundColor: "#C20605" }}
+    >
       <div className="container px-4 px-lg-5">
-        <a className="navbar-brand" href="#" style={{color: "white"}}>
+        <a className="navbar-brand" href="#" style={{ color: "white" }}>
           <b>My Movie Plan</b>
         </a>
         <button
@@ -29,14 +31,34 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/movies">
-              <b>Movies</b>
+                <b>Movies</b>
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">
-              <b>Contact</b>
+                <b>Contact</b>
               </NavLink>
             </li>
+          </ul>
+          <ul className="navbar-nav me-right mb-2 mb-lg-0 ms-lg-4">
+            {true && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admin">
+                  <b>Log In</b>
+                </NavLink>
+              </li>
+            )}
+            {/* {adminLoggedIn && (
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="/"
+                  onClick={() => dispatch(logoutAdmin())}
+                >
+                  <b>Log Out</b>
+                </a>
+              </li>
+            )} */}
           </ul>
         </div>
       </div>

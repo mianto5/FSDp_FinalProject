@@ -22,5 +22,9 @@ public class MovieService {
 	public Optional<Movie> getMovieById(String mid) {
 		return movieRepo.findById(mid);
 	}
+	
+	public Movie addMovie(Movie movie) {
+		return movieRepo.save(movie);
+	}
 
 }
