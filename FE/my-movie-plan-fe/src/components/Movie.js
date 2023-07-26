@@ -11,6 +11,7 @@ export default function Movie({ movie }) {
             <p>
               <img
                 src={movie.imageurl}
+                style={{height: 300}}
                 className="img-fluid rounded mb-4 mb-lg-0"
               />
             </p>
