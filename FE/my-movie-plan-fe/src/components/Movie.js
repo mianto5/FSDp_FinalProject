@@ -16,12 +16,13 @@ export default function Movie({ movie }) {
             </p>
           </div>
           <div className="col-sm-6 col-md-6">
-            <h5>{movie.moviename}</h5>
+            <h5><b>{movie.moviename}</b></h5>
             <p>({movie.genre})</p>
             <p>{movie.moviedate}, {movie.movietime}</p>
             <p>${movie.ticketprice}</p>
             <NavLink
-              className="btn btn-primary btn-sm"
+              className="btn btn-sm"
+              style={{backgroundColor: "#C20605", color: "white"}}
               to={"/movies/" + movie.mid}
             >
               More Info

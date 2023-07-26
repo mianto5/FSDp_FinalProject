@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 export default function NavBar() {
  
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#C20605"}}>
       <div className="container px-4 px-lg-5">
-        <a className="navbar-brand" href="#">
-          My Movie Plan
+        <a className="navbar-brand" href="#" style={{color: "white"}}>
+          <b>My Movie Plan</b>
         </a>
         <button
           className="navbar-toggler"
@@ -24,17 +24,17 @@ export default function NavBar() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/">
-                About
+                <b>About</b>
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/movies">
-                Movies
+              <b>Movies</b>
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">
-                Contact
+              <b>Contact</b>
               </NavLink>
             </li>
           </ul>
