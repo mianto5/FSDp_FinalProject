@@ -8,6 +8,8 @@ import EditMovie from "./components/EditMovie";
 import MovieDetail from "./components/MovieDetail";
 import Movies from "./components/Movies";
 import NavBar from "./components/NavBar";
+import Register from "./components/Register";
+import UserLogin from './components/UserLogin';
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
         <Route path="/movies/add" element={<AddMovie />}></Route>
         <Route path="/movies/edit/:mid" element={<EditMovie />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/admin" element={<AdminLogin />}></Route>
+        <Route path="/login/admin" element={<AdminLogin />}></Route>
+        <Route path="/login/user" element={<UserLogin />}></Route>
+        <Route path="/register" element={<Register />}></Route>
       </Routes>
     </BrowserRouter>
   );

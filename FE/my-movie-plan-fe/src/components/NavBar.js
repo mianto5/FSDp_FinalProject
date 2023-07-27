@@ -61,7 +61,7 @@ export default function NavBar() {
           <ul className="navbar-nav me-right mb-2 mb-lg-0 ms-lg-4">
             {(name===null || name==="") && (
               <li className="nav-item">
-                <NavLink className="nav-link" to="/admin">
+                <NavLink className="nav-link" to="/login/user">
                   <b>Log In</b>
                 </NavLink>
               </li>

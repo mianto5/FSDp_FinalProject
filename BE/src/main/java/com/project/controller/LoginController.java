@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,17 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.entity.Admin;
 import com.project.entity.Credentials;
+import com.project.entity.User;
 import com.project.service.AdminService;
+import com.project.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-//@RequestMapping("/login")
 @CrossOrigin
 public class LoginController {
 	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private UserService userService;
 	
 	@PostMapping("/login/admin")
 	public String validateAdmin(@RequestBody Credentials admin, HttpSession session){
@@ -36,6 +38,22 @@ public class LoginController {
 			session.setAttribute("role", "admin");
 		}
 		return "XXX";
+	}
+	
+	@PostMapping("/login/user")
+	public void validateUser(@RequestBody Credentials user, HttpSession session){
+		System.out.println("Username: "+user.getName());
+		System.out.println("Userpassword: "+user.getPassword());
+		if(userService.validateUser(user.getName(), user.getPassword())) {
+			session.setAttribute("name", user.getName());
+			session.setAttribute("role", "user");
+		}
+	}
+	
+	@PostMapping("/register")
+	public void register(@RequestBody User user) {
+		System.out.println("User name: "+user.getUsername());
+		userService.register(user);
 	}
 	
 	@GetMapping("/logout")

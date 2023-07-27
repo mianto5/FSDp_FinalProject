@@ -48,7 +48,7 @@ export default function Movie({ movie }) {
           <h5>
             <b>{movie.moviename}</b>
           </h5>
-          <p>({movie.genre})</p>
+          <p>({movie.genre}, {movie.language})</p>
           <p>
             {movie.moviedate}, {movie.movietime}
           </p>
