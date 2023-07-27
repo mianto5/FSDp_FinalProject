@@ -1,7 +1,25 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
+  let name = sessionStorage.getItem("name");
+  let role = sessionStorage.getItem("role");
+  let navigate = useNavigate();
+
+  console.log(name);
+  console.log(role);
+
+  const logOut = () => {
+    fetch("http://localhost:8080/logout")
+      .then((response) => {
+      if(response.ok) {
+        sessionStorage.removeItem("name");
+        sessionStorage.removeItem("role");
+        navigate("/");
+      }
+    });
+  };
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light"
@@ -41,24 +59,24 @@ export default function NavBar() {
             </li>
           </ul>
           <ul className="navbar-nav me-right mb-2 mb-lg-0 ms-lg-4">
-            {true && (
+            {(name===null || name==="") && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admin">
                   <b>Log In</b>
                 </NavLink>
               </li>
             )}
-            {/* {adminLoggedIn && (
+            {(name!==null && name!=="") && (
               <li className="nav-item">
                 <a
                   className="nav-link"
                   href="/"
-                  onClick={() => dispatch(logoutAdmin())}
+                  onClick={() => logOut()}
                 >
                   <b>Log Out</b>
                 </a>
               </li>
-            )} */}
+            )}
           </ul>
         </div>
       </div>

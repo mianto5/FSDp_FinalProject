@@ -20,18 +20,30 @@ import com.project.service.AdminService;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/login")
+//@RequestMapping("/login")
 @CrossOrigin
-public class HomeController {
+public class LoginController {
 	
 	@Autowired
 	private AdminService adminService;
 	
-	@PostMapping("/admin")
-	public String validateAdmin(@RequestBody Credentials admin){
+	@PostMapping("/login/admin")
+	public String validateAdmin(@RequestBody Credentials admin, HttpSession session){
 		System.out.println("Adminname: "+admin.getName());
 		System.out.println("Adminpassword: "+admin.getPassword());
+		if(adminService.validateAdmin(admin.getName(), admin.getPassword())) {
+			session.setAttribute("name", admin.getName());
+			session.setAttribute("role", "admin");
+		}
 		return "XXX";
+	}
+	
+	@GetMapping("/logout")
+	public void logout(HttpSession session) {
+		System.out.println("logout page");
+		session.removeAttribute("name");
+		session.removeAttribute("role");
+		session.invalidate();
 	}
 
 }

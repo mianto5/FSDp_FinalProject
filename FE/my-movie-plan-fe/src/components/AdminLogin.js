@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -7,6 +8,7 @@ const initialState = {
 
 export default function AdminLogin() {
   const [admin, setAdmin] = useState(initialState);
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +17,15 @@ export default function AdminLogin() {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(admin)    
-    }).then((response) => {console.log(response)});
+    }).then((response) => {
+      if(response.ok) {
+        sessionStorage.setItem("name", admin.name);
+        sessionStorage.setItem("role", "admin");
+        console.log(sessionStorage.getItem("name"));
+        console.log(sessionStorage.getItem("role"));
+        navigate("/movies");
+      }
+    });
   };
 
   return (
