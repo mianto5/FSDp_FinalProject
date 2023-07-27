@@ -18,7 +18,9 @@ export default function Movies() {
       <div className="row gx-4 gx-lg-5 align-items-center my-5">
         <h3>Available Movies</h3>
         <div className="text-center">
-          <NavLink to={`add`}>ADD NEW PRODUCT</NavLink>
+          <NavLink className="btn btn-sm"
+              style={{backgroundColor: "#C20605", color: "white"}}
+              to={`add`}><b>ADD NEW PRODUCT</b></NavLink>
         </div>
         <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-1 row-cols-lg-2 justify-content-center">
           {movies.map((movie) => (

@@ -20,7 +20,7 @@ import com.project.service.AdminService;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-// @RequestMapping("/login")
+@RequestMapping("/login")
 @CrossOrigin
 public class HomeController {
 	

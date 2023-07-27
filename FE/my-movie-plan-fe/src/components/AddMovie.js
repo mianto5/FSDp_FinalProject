@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   moviename: "",
@@ -9,26 +10,75 @@ const initialState = {
   genre: "",
   moviedate: "",
   movietime: "",
+  movieenabled: true,
 };
 
 export default function AddMovie() {
   const [movie, setMovie] = useState(initialState);
+  const [genre, setGenre] = useState("");
+  const [genres, setGenres] = useState([]);
+  const [language, setLanguage] = useState("");
+  const [languages, setLanguages] = useState([]);
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(movie);
-    fetch("http://localhost:8080/movie/add", {
+    fetch("http://localhost:8080/movies/add", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json"},
       body: JSON.stringify(movie),
     }).then((response) => {
-      console.log(response);
+      if(response.ok) {
+        navigate("/movies");
+      }
     });
   };
 
+  const handleSubmitGenre = (e) => {
+    e.preventDefault();
+    console.log(genre);
+    let response = fetch("http://localhost:8080/movies/genres", {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(genre),
+    }).then((response) => {
+      if(response.ok) {
+        navigate("/movies");
+      }
+    });
+  };
+
+  const handleSubmitLanguage = (e) => {
+    e.preventDefault();
+    console.log(language);
+    fetch("http://localhost:8080/movies/languages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(language),
+    }).then((response) => {
+      if(response.ok) {
+        navigate("/movies");
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:8080/movies/genres")
+      .then((response) => response.json())
+      .then((result) => {
+        setGenres(result);
+      });
+    fetch("http://localhost:8080/movies/languages")
+      .then((response) => response.json())
+      .then((result) => {
+        setLanguages(result);
+      });
+  }, []);
+
   return (
     <div className="container px-4 px-lg-5">
-      <div className="row gx-4 gx-lg-5 align-items-center my-5">
+      <div className="row gx-4 gx-lg-5 my-5">
         <h3>Add New Movie</h3>
         <p></p>
         <div className="col-md-6">
@@ -58,12 +108,10 @@ export default function AddMovie() {
                   setMovie({ ...movie, [e.target.name]: e.target.value })
                 }
               >
-                <option value="Animation">Animation</option>
-                <option value="Comedy">Comedy</option>
-                <option value="Drama">Drama</option>
-                <option value="Fantasy">Fantasy</option>
-                <option value="Romance">Romance</option>
-                <option value="Thriller">Thriller</option>
+                <option value="default">Select genre</option>
+                {genres.map((g) => (
+                  <option value={g.genre}>{g.genre}</option>
+                ))}
               </select>
             </div>
             <div className="mb-3">
@@ -91,10 +139,10 @@ export default function AddMovie() {
                   setMovie({ ...movie, [e.target.name]: e.target.value })
                 }
               >
-                <option value="CZ">CZ</option>
-                <option value="DE">DE</option>
-                <option value="EN">EN</option>
-                <option value="IT">IT</option>
+                <option value="default">Select language</option>
+               {languages.map((l) => (
+                  <option value={l.language}>{l.language}</option>
+                ))}
               </select>
             </div>
             <div className="mb-3">
@@ -136,6 +184,7 @@ export default function AddMovie() {
                   setMovie({ ...movie, [e.target.name]: e.target.value })
                 }
               >
+                <option value="default">Select time</option>
                 <option value="14:00">14:00</option>
                 <option value="17:00">17:00</option>
                 <option value="20:00">20:00</option>
@@ -162,6 +211,57 @@ export default function AddMovie() {
               onClick={handleSubmit}
             >
               Add Movie
+            </button>
+          </form>
+        </div>
+        <div className="col-md-6">
+          <form>
+            <div className="mb-3">
+              <label className="form-label" style={{ color: "#eb0216" }}>
+                Add New Genre:
+              </label>{" "}
+              <input
+                type="text"
+                className="form-control"
+                name="genre"
+                value={genre.genre}
+                onChange={(e) =>
+                  setGenre({ ...genre, [e.target.name]: e.target.value })
+                }
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn"
+              style={{ backgroundColor: "#C20605", color: "white" }}
+              onClick={handleSubmitGenre}
+            >
+              Add Genre
+            </button>
+          </form>
+          <br></br>
+          <form>
+            <div className="mb-3">
+              <label className="form-label" style={{ color: "#eb0216" }}>
+                Add New Language:
+              </label>{" "}
+              <input
+                type="text"
+                className="form-control"
+                name="language"
+                value={language.language}
+                onChange={(e) =>
+                  setLanguage({ ...language, [e.target.name]: e.target.value })
+                }
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn"
+              style={{ backgroundColor: "#C20605", color: "white" }}
+              onClick={handleSubmitLanguage}
+            >
+              Add Language
             </button>
           </form>
         </div>

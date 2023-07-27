@@ -11,7 +11,7 @@ export default function AdminLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(admin);
-    fetch("http://localhost:8080/admin", {
+    fetch("http://localhost:8080/login/admin", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(admin)    

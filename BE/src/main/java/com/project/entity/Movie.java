@@ -1,7 +1,6 @@
 package com.project.entity;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +22,7 @@ public class Movie {
 	private String imageurl;
 	private String genre;
 	private LocalDate moviedate;
-	private LocalTime movietime;
+	private String movietime;
 	private boolean movieenabled;
 	
 	public Movie() {
@@ -32,7 +31,7 @@ public class Movie {
 	}
 
 	public Movie(String moviename, String language, double ticketprice, String description, String imageurl,
-			String genre, LocalDate moviedate, LocalTime movietime, boolean movieenabled) {
+			String genre, LocalDate moviedate, String movietime, boolean movieenabled) {
 		super();
 		this.moviename = moviename;
 		this.language = language;
@@ -109,11 +108,11 @@ public class Movie {
 		this.moviedate = moviedate;
 	}
 
-	public LocalTime getMovietime() {
+	public String getMovietime() {
 		return movietime;
 	}
 
-	public void setMovietime(LocalTime movietime) {
+	public void setMovietime(String movietime) {
 		this.movietime = movietime;
 	}
 
