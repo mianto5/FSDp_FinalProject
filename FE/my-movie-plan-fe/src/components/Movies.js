@@ -8,11 +8,19 @@ export default function Movies() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/movies/all")
+    if(role === "admin"){
+      fetch("http://localhost:8080/movies/all")
       .then((response) => response.json())
       .then((result) => {
         setMovies(result);
       });
+    }else{
+      fetch("http://localhost:8080/movies/available")
+      .then((response) => response.json())
+      .then((result) => {
+        setMovies(result);
+      });
+    }
   }, []);
 
   return (

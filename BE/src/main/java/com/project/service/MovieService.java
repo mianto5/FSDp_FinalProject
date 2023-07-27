@@ -19,12 +19,24 @@ public class MovieService {
 		return (List<Movie>) movieRepo.findAll();
 	}
 	
+	public List<Movie> getAvailableMovies() {		
+		return (List<Movie>) movieRepo.findByMovieenabled(true);
+	}
+	
 	public Optional<Movie> getMovieById(String mid) {
 		return movieRepo.findById(mid);
 	}
 	
 	public Movie addMovie(Movie movie) {
 		return movieRepo.save(movie);
+	}
+	
+	public Movie editMovie(Movie movie) {
+		return movieRepo.save(movie);
+	}
+	
+	public void deleteMovie(String mid) {
+		movieRepo.deleteById(mid);
 	}
 
 }
