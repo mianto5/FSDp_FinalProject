@@ -156,7 +156,7 @@ export default function Movies() {
                 .includes(movieSearch.search.toLowerCase()) &&
               movie.genre.includes(movieFilter.genre) &&
               movie.language.includes(movieFilter.language) && (
-                <Movie key={movie.mID} movie={movie} />
+                <Movie key={movie.mid} movie={movie} />
               )
           )}
         </div>

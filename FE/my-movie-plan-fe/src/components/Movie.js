@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { add } from "../redux/cartslice";
 
 export default function Movie({ movie }) {
   let navigate = useNavigate();
+  let dispatch = useDispatch();
   let name = sessionStorage.getItem("name");
   let role = sessionStorage.getItem("role");
   let pageContent = "";
@@ -32,6 +35,10 @@ export default function Movie({ movie }) {
     });
   };
 
+  const addToCart = () => {
+    dispatch(add(movie));
+  };
+
   if (movie !== undefined) {
     pageContent = (
       <div className="row mt-5">
@@ -59,7 +66,17 @@ export default function Movie({ movie }) {
             to={"/movies/" + movie.mid}
           >
             More Info
-          </NavLink>
+          </NavLink>{" "}
+          {role === "user" && (
+              <button
+              type="submit"
+              className="btn btn-sm"
+              style={{ backgroundColor: "#C20605", color: "white" }}
+              onClick={() => addToCart()}
+            >
+              <b>Add to Cart!</b>
+            </button>
+          )}
           {role === "admin" && (
             <p>
               <br></br>

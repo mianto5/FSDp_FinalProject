@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 import AddMovie from "./components/AddMovie";
 import AdminLogin from "./components/AdminLogin";
+import Cart from "./components/Cart";
 import Contact from "./components/Contact";
 import EditMovie from "./components/EditMovie";
 import MovieDetail from "./components/MovieDetail";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/movies/add" element={<AddMovie />}></Route>
         <Route path="/movies/edit/:mid" element={<EditMovie />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
         <Route path="/profile/:name" element={<Profile />}></Route>
         <Route path="/login/admin" element={<AdminLogin />}></Route>
         <Route path="/login/user" element={<UserLogin />}></Route>
