@@ -110,28 +110,6 @@ export default function Movies() {
             <div className="col-sm-12 col-md-6">
               <label className="form-label">
                 <h5>Filter Movies:</h5>
-                {/* <input
-                  type="radio"
-                  name="filter"
-                  value="byGenre"
-                  onChange={(e) => [
-                    setMovieFilter({
-                      [e.target.name]: e.target.value,
-                    }),
-                  ]}
-                />
-                  <label for="byGenre">By Genre</label>  {" "}
-                <input
-                  type="radio"
-                  name="filter"
-                  value="byLang"
-                  onChange={(e) => [
-                    setMovieFilter({
-                      [e.target.name]: e.target.value,
-                    }),
-                  ]}
-                />
-                  <label for="byLang">By Language</label> */}
               </label>{" "}
               <div className="mb-3">
                 <select
@@ -167,14 +145,6 @@ export default function Movies() {
                   ))}
                 </select>
               </div>
-              {/* <button
-                type="submit"
-                className="btn"
-                style={{ backgroundColor: "#C20605", color: "white" }}
-                onClick={handleFilter}
-              >
-                Filter
-              </button> */}
             </div>
           </form>
         </div>

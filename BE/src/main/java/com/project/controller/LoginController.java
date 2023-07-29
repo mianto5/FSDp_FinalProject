@@ -1,21 +1,18 @@
 package com.project.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.entity.Admin;
 import com.project.entity.Credentials;
 import com.project.entity.User;
+import com.project.entity.UserDTO;
 import com.project.service.AdminService;
+import com.project.service.UserDTOService;
 import com.project.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +25,13 @@ public class LoginController {
 	private AdminService adminService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserDTOService userDTOService;
+	
+	@GetMapping("/profile/{name}")
+	public UserDTO getUserByUsername(@PathVariable String name){
+		return userDTOService.getUserDTOByName(name);
+	}
 	
 	@PostMapping("/login/admin")
 	public String validateAdmin(@RequestBody Credentials admin, HttpSession session){

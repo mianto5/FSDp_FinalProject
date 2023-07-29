@@ -10,9 +10,8 @@ export default function NavBar() {
   console.log(role);
 
   const logOut = () => {
-    fetch("http://localhost:8080/logout")
-      .then((response) => {
-      if(response.ok) {
+    fetch("http://localhost:8080/logout").then((response) => {
+      if (response.ok) {
         sessionStorage.removeItem("name");
         sessionStorage.removeItem("role");
         navigate("/");
@@ -59,20 +58,23 @@ export default function NavBar() {
             </li>
           </ul>
           <ul className="navbar-nav me-right mb-2 mb-lg-0 ms-lg-4">
-            {(name===null || name==="") && (
+            {(role === "user") && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to={"/profile/"+ name}>
+                  <b>Profile</b>
+                </NavLink>
+              </li>
+            )}
+            {(name === null || name === "") && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/login/user">
                   <b>Log In</b>
                 </NavLink>
               </li>
             )}
-            {(name!==null && name!=="") && (
+            {name !== null && name !== "" && (
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/"
-                  onClick={() => logOut()}
-                >
+                <a className="nav-link" href="/" onClick={() => logOut()}>
                   <b>Log Out</b>
                 </a>
               </li>
