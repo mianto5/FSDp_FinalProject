@@ -7,6 +7,9 @@ export default function Movies() {
   let role = sessionStorage.getItem("role");
   const [movies, setMovies] = useState([]);
   const [movieSearch, setMovieSearch] = useState({ search: "" });
+  const [movieFilter, setMovieFilter] = useState({ genre: "", language: "" });
+  const [genres, setGenres] = useState([]);
+  const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
     if (role === "admin") {
@@ -22,6 +25,16 @@ export default function Movies() {
           setMovies(result);
         });
     }
+    fetch("http://localhost:8080/movies/genres")
+      .then((response) => response.json())
+      .then((result) => {
+        setGenres(result);
+      });
+    fetch("http://localhost:8080/movies/languages")
+      .then((response) => response.json())
+      .then((result) => {
+        setLanguages(result);
+      });
   }, []);
 
   return (
@@ -37,11 +50,12 @@ export default function Movies() {
             >
               <b>ADD NEW MOVIE, GENRE OR LANGUAGE</b>
             </NavLink>
+            <p></p>
           </div>
         )}
-        <div>
-          <form>
-            <div className="col-sm-12 col-md-6">
+        <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-1 row-cols-lg-2 justify-content-center">
+          <div className="col-sm-12 col-md-6">
+            <form>
               <label className="form-label">
                 <h5>Search Movies:</h5>
               </label>{" "}
@@ -54,19 +68,127 @@ export default function Movies() {
                   setMovieSearch({
                     [e.target.name]: e.target.value,
                   }),
-                  console.log(movieSearch),
                 ]}
               />
+            </form>
+            <br></br>
+            <form>
+              <div className="col-sm-12 col-md-6">
+                <label className="form-label">
+                  <h5>Sort Movies:</h5>
+                  <input
+                    type="radio"
+                    name="sort"
+                    value="byAlpha"
+                    onChange={() => [
+                      setMovies(
+                        [...movies].sort((a, b) =>
+                          a.moviename > b.moviename ? 1 : -1
+                        )
+                      ),
+                    ]}
+                  />
+                    <label for="byAlpha">Alphabetically</label>  {" "}
+                  <input
+                    type="radio"
+                    name="sort"
+                    value="byDate"
+                    onChange={() => [
+                      setMovies(
+                        [...movies].sort((a, b) =>
+                          a.moviedate > b.moviedate ? 1 : -1
+                        )
+                      ),
+                    ]}
+                  />
+                    <label for="byDate">By Date</label>
+                </label>{" "}
+              </div>
+            </form>
+          </div>
+          <form>
+            <div className="col-sm-12 col-md-6">
+              <label className="form-label">
+                <h5>Filter Movies:</h5>
+                {/* <input
+                  type="radio"
+                  name="filter"
+                  value="byGenre"
+                  onChange={(e) => [
+                    setMovieFilter({
+                      [e.target.name]: e.target.value,
+                    }),
+                  ]}
+                />
+                  <label for="byGenre">By Genre</label>  {" "}
+                <input
+                  type="radio"
+                  name="filter"
+                  value="byLang"
+                  onChange={(e) => [
+                    setMovieFilter({
+                      [e.target.name]: e.target.value,
+                    }),
+                  ]}
+                />
+                  <label for="byLang">By Language</label> */}
+              </label>{" "}
+              <div className="mb-3">
+                <select
+                  className="form-control"
+                  name="genre"
+                  onChange={(e) =>
+                    setMovieFilter({
+                      ...movieFilter,
+                      [e.target.name]: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">All genres</option>
+                  {genres.map((g) => (
+                    <option value={g.genre}>{g.genre}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-3">
+                <select
+                  className="form-control"
+                  name="language"
+                  onChange={(e) =>
+                    setMovieFilter({
+                      ...movieFilter,
+                      [e.target.name]: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">All languages</option>
+                  {languages.map((l) => (
+                    <option value={l.language}>{l.language}</option>
+                  ))}
+                </select>
+              </div>
+              {/* <button
+                type="submit"
+                className="btn"
+                style={{ backgroundColor: "#C20605", color: "white" }}
+                onClick={handleFilter}
+              >
+                Filter
+              </button> */}
             </div>
           </form>
-          <p>Sort:</p>
-          <p>Filter:</p>
         </div>
         <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-1 row-cols-lg-2 justify-content-center">
-          {movies.map((movie) => (
-            movie.moviename.toLowerCase().includes(movieSearch.search.toLowerCase()) && (
-            <Movie key={movie.mID} movie={movie} /> )
-          ))}
+          {movies.map(
+            (movie) =>
+              movie.moviename
+                .toLowerCase()
+                .includes(movieSearch.search.toLowerCase()) &&
+              movie.genre.includes(movieFilter.genre) &&
+              movie.language.includes(movieFilter.language) && (
+                <Movie key={movie.mID} movie={movie} />
+              )
+          )}
         </div>
       </div>
     </div>
