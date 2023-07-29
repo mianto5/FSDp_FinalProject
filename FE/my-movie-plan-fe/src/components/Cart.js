@@ -35,13 +35,15 @@ export default function Cart() {
             <p>Please, check available movies first.</p>
           </div>
         )}
-        <div>
-          <h3>Your Cart</h3>
-          <br></br>
-        </div>
+        {cart.length !== 0 && (
+          <div>
+            <h3>Your Cart</h3>
+            <br></br>
+          </div>
+        )}
         {cart.map((movie) => (
           <div key={movie.mid} className="row mb-3 text-center">
-            <div className="col-7">
+            <div className="col-6">
               <b>{movie.moviename}</b> ({movie.language}, {movie.moviedate}{" "}
               {movie.movietime})
             </div>
@@ -52,7 +54,7 @@ export default function Cart() {
                 style={{
                   backgroundColor: "#C20605",
                   color: "white",
-                  width: "40px",
+                  width: "50px",
                 }}
               >
                 <b>-</b>
@@ -63,26 +65,26 @@ export default function Cart() {
                 style={{
                   backgroundColor: "#C20605",
                   color: "white",
-                  width: "40px",
+                  width: "50px",
                 }}
               >
                 <b>+</b>
               </button>
             </div>
-            <div className="col-2 text-right">
+            <div className="col-3 text-right">
               {movie.amount} x ${movie.ticketprice}
             </div>
           </div>
         ))}
         {cart.length !== 0 && (
-          <>
+          <div>
             <hr></hr>
             <div className="row text-center">
-              <div className="col-7"></div>
+              <div className="col-6"></div>
               <div className="col-3">
                 <strong>Total Price</strong>
               </div>
-              <div className="col-2 text-right">
+              <div className="col-3 text-right">
                 <strong>${totalPrice}</strong>
               </div>
             </div>
@@ -91,7 +93,7 @@ export default function Cart() {
                 Confirm Your Order
               </button> */}
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
