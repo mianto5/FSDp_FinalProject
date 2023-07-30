@@ -1,5 +1,7 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Item {
 	private int amount;
 	private double ticketprice;
 	
+	@JsonIgnoreProperties("items")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pid")
 	private Purchase purchase;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const initialState = {
+const initialUser = {
   uid: "",
   username: "",
   fname: "",
@@ -9,7 +10,8 @@ const initialState = {
 };
 
 export default function Profile() {
-  const [user, setUser] = useState(initialState);
+  const [user, setUser] = useState(initialUser);
+  const [purchases, setPurchases] = useState([]);
   let name = sessionStorage.getItem("name");
   let role = sessionStorage.getItem("role");
 
@@ -19,6 +21,14 @@ export default function Profile() {
       .then((result) => {
         setUser(result);
       });
+    fetch("http://localhost:8080/purchases/" + name)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPurchases(data);
+      });
+    console.log(purchases);
   }, []);
 
   return (
@@ -30,7 +40,7 @@ export default function Profile() {
           <div>
             <h5>Active Tickets:</h5>
             <p></p>
-            <table class="table table-striped table-dark">
+            <table className="table table-striped table-dark">
               <thead>
                 <tr>
                   <th scope="col">Date</th>
@@ -78,7 +88,7 @@ export default function Profile() {
                 <h5>Purchase History:</h5>
                 <p></p>
                 <div>
-                  <table class="table table-striped table-dark">
+                  <table className="table table-striped table-dark">
                     <thead>
                       <tr>
                         <th scope="col">ID</th>
@@ -88,12 +98,25 @@ export default function Profile() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
+                      {purchases.map((purchase) => (
+                        <tr>
+                          <th scope="row">{purchase.pid}</th>
+                          <td>{purchase.purchasedate}</td>
+                          <td>${purchase.totalprice}</td>
+                          <td>
+                            <NavLink
+                              className="btn btn-sm"
+                              style={{
+                                backgroundColor: "#C20605",
+                                color: "white",
+                              }}
+                              to={"/order/" + purchase.pid}
+                            >
+                              Detail
+                            </NavLink>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

@@ -30,4 +30,9 @@ public class PurchaseController {
 		purchaseService.addPurchase(purchase);
 	}
 	
+	@GetMapping("/{name}")
+	public List<Purchase> getAllByUsername(@PathVariable String name) {
+		return purchaseService.getAllByUsername(name);
+	}
+	
 }

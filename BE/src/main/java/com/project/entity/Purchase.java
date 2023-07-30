@@ -3,6 +3,8 @@ package com.project.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,6 +25,7 @@ public class Purchase {
 	private String createdby;
 	private double totalprice;
 	
+	@JsonIgnoreProperties("purchase")
 	@OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
 	private List<Item> items;

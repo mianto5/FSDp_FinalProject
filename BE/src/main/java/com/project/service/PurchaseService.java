@@ -1,5 +1,7 @@
 package com.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class PurchaseService {
 
 	public Purchase addPurchase(Purchase purchase) {
 		return purchaseRepo.save(purchase);
+	}
+	
+	public List<Purchase> getAllByUsername(String username) {
+		return purchaseRepo.findByCreatedby(username);
 	}
 
 }
