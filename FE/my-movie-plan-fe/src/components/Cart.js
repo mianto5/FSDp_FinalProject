@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { cartitems, add, remove, removeAll } from "../redux/cartslice";
 
 const initialState = {
-  items: [],
-  totalPrice: "",
+  createdby: "",
+  totalprice: 0,
+  items: [
+    {
+      mid: 0,
+      amount: 0,
+      ticketprice: 0,
+    },
+  ],
 };
 
 export default function Cart() {
+  let name = sessionStorage.getItem("name");
+  let role = sessionStorage.getItem("role");
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let cart = useSelector(cartitems);
+  let purchase = initialState;
 
   const totalPrice = cart.reduce(
     (a, b) => a + b.amount * Number(b.ticketprice),
@@ -24,6 +34,25 @@ export default function Cart() {
 
   const addItem = (item) => {
     dispatch(add(item));
+  };
+
+  const handleConfirm = (e) => {
+    e.preventDefault();
+    purchase.createdby = name;
+    purchase.totalprice = totalPrice;
+    purchase.items = [];
+    cart.map((item) => purchase.items.push({mid: item.mid, amount: item.amount, ticketprice: item.ticketprice}))
+    console.log(purchase);
+    fetch("http://localhost:8080/purchases/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(purchase),
+    }).then((response) => {
+      if(response.ok) {
+        dispatch(removeAll());
+        navigate("/summary");
+      }
+    });
   };
 
   return (
@@ -88,10 +117,16 @@ export default function Cart() {
                 <strong>${totalPrice}</strong>
               </div>
             </div>
+            <p></p>
             <div className="text-center">
-              {/* <button onClick={handleConfirm} className="btn btn-dark">
-                Confirm Your Order
-              </button> */}
+            <p></p>
+              <button
+                onClick={handleConfirm}
+                className="btn"
+                style={{ backgroundColor: "#C20605", color: "white" }}
+              >
+                <b>Pay Your Order</b>
+              </button>
             </div>
           </div>
         )}
