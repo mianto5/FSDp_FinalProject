@@ -26,13 +26,19 @@ public class PurchaseController {
 	private PurchaseService purchaseService;
 	
 	@PostMapping("/add")
-	public void addPurchase(@RequestBody Purchase purchase) {
+	public int addPurchase(@RequestBody Purchase purchase) {
 		purchaseService.addPurchase(purchase);
+		return 12;
 	}
 	
 	@GetMapping("/{name}")
 	public List<Purchase> getAllByUsername(@PathVariable String name) {
 		return purchaseService.getAllByUsername(name);
+	}
+	
+	@GetMapping("/detail/{pid}")
+	public Optional<Purchase> getPurchaseById(@PathVariable String pid){
+		return purchaseService.getPurchaseById(pid);
 	}
 	
 }

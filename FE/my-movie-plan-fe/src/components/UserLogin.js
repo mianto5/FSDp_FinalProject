@@ -24,6 +24,8 @@ export default function UserLogin() {
         console.log(sessionStorage.getItem("name"));
         console.log(sessionStorage.getItem("role"));
         navigate("/movies");
+      }else{
+        alert("Invalid credentials.");
       }
     });
   };

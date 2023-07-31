@@ -21,8 +21,11 @@ export default function Register() {
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify(user),
     }).then((response) => {
+      console.log(response);
       if(response.ok) {
         navigate("/login/user");
+      }else{
+        alert("Registration unsuccessful. Try different username.");
       }
     });
   };

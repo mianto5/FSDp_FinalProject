@@ -47,10 +47,10 @@ export default function Cart() {
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify(purchase),
-    }).then((response) => {
+    }).then(async (response) => {
       if(response.ok) {
         dispatch(removeAll());
-        navigate("/summary");
+        navigate("/summary/" + await response.text());
       }
     });
   };

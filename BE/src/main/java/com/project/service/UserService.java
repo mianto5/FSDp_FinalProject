@@ -29,8 +29,12 @@ public class UserService {
 			return false;
 	}
 	
-	public User register(User user) {
-		return userRepo.save(user);
+	public User register(User user) throws Exception {
+		if (userRepo.existsByUsername(user.getUsername())) {
+			throw new Exception("Username already exists.");
+		}else {
+			return userRepo.save(user);
+		}
 	}
 
 }

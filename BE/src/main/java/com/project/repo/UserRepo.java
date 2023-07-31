@@ -9,5 +9,7 @@ import com.project.entity.User;
 public interface UserRepo extends CrudRepository<User, String>{
 	
 	public User findByUsername(String username);
+	
+	public boolean existsByUsername(String username);
 
 }

@@ -55,7 +55,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/register")
-	public void register(@RequestBody User user) {
+	public void register(@RequestBody User user) throws Exception {
 		System.out.println("User name: "+user.getUsername());
 		userService.register(user);
 	}

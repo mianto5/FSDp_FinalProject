@@ -27,9 +27,9 @@ function App() {
         <Route path="/movies/edit/:mid" element={<EditMovie />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/summary" element={<OrderSummary />}></Route>
+        <Route path="/summary/:pid" element={<OrderSummary />}></Route>
         <Route path="/profile/:name" element={<Profile />}></Route>
-        <Route path="/order/:oid" element={<OrderDetail />}></Route>
+        <Route path="/order/:pid" element={<OrderDetail />}></Route>
         <Route path="/login/admin" element={<AdminLogin />}></Route>
         <Route path="/login/user" element={<UserLogin />}></Route>
         <Route path="/register" element={<Register />}></Route>

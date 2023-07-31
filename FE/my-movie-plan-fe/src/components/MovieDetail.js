@@ -64,7 +64,7 @@ export default function MovieDetail() {
       </div>
     );
   } else {
-    pageContent = <div>There is no existing event with this ID.</div>;
+    pageContent = <div>There is no existing movie with this ID.</div>;
   }
 
   return <div>{pageContent}</div>;
