@@ -21,6 +21,9 @@ export default function Profile() {
       .then((result) => {
         setUser(result);
       });
+  }, []);
+
+  useEffect(() => {
     fetch("http://localhost:8080/purchases/" + name)
       .then((response) => {
         return response.json();
@@ -28,7 +31,6 @@ export default function Profile() {
       .then((data) => {
         setPurchases(data);
       });
-    console.log(purchases);
   }, []);
 
   return (
@@ -38,32 +40,7 @@ export default function Profile() {
           <h3>Hello, {user.fname}!</h3>
           <p></p>
           <div>
-            <h5>Active Tickets:</h5>
             <p></p>
-            <table className="table table-striped table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Movie</th>
-                  <th scope="col">Language</th>
-                  <th scope="col">Tickets</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p></p>
-          <hr></hr>
-          <div>
             <div className="row">
               <div className="col-lg-3 col-md-12">
                 <h5>Account Details:</h5>
