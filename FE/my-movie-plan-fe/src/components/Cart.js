@@ -43,7 +43,7 @@ export default function Cart() {
     purchase.items = [];
     cart.map((item) => purchase.items.push({mid: item.mid, amount: item.amount, ticketprice: item.ticketprice}))
     console.log(purchase);
-    fetch("http://localhost:8080/purchases/add", {
+    fetch("http://localhost:8080/purchases/summary/add", {
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify(purchase),

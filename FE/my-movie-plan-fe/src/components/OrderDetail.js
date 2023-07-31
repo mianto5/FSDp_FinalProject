@@ -62,7 +62,7 @@ export default function OrderDetail() {
               return movie ? (
                 <div key={item.iid} className="row mb-3 text-center">
                   <div className="col-6">
-                    {movie.moviename} ({movie.language}, {movie.moviedate}{" "}
+                    <b>{movie.moviename}</b> ({movie.language}, {movie.moviedate}{" "}
                     {movie.movietime})
                   </div>
                   <div className="col-3 text-right">
