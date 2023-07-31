@@ -25,7 +25,6 @@ const cartslice = createSlice({
     remove: (state, action) => {
       let removeitem = action.payload;
       const exist = state.cartitems.find((item) => item.mid === removeitem.mid);
-      console.log({exist});
       if (exist.amount === 1) {
         state.cartitems.splice(
           state.cartitems.findIndex((item) => item.mid === removeitem.mid),

@@ -12,7 +12,6 @@ export default function UserLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
     fetch("http://localhost:8080/login/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -21,8 +20,6 @@ export default function UserLogin() {
       if (response.ok) {
         sessionStorage.setItem("name", user.name);
         sessionStorage.setItem("role", "user");
-        console.log(sessionStorage.getItem("name"));
-        console.log(sessionStorage.getItem("role"));
         navigate("/movies");
       }else{
         alert("Invalid credentials.");

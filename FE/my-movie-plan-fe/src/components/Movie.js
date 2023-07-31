@@ -21,9 +21,7 @@ export default function Movie({ movie }) {
   };
 
   const changeStatus = () => {
-    console.log(movie.movieenabled);
     movie.movieenabled = !movie.movieenabled;
-    console.log(movie.movieenabled);
     fetch("http://localhost:8080/movies/status/" + movie.mid, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

@@ -9,9 +9,6 @@ export default function NavBar() {
   const cart = useSelector(cartitems);
   let navigate = useNavigate();
 
-  console.log(name);
-  console.log(role);
-
   const logOut = () => {
     fetch("http://localhost:8080/logout").then((response) => {
       if (response.ok) {

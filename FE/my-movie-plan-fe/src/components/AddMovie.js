@@ -23,7 +23,6 @@ export default function AddMovie() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(movie);
     fetch("http://localhost:8080/movies/add", {
       method: "POST",
       headers: { "Content-Type": "application/json"},
@@ -37,7 +36,6 @@ export default function AddMovie() {
 
   const handleSubmitGenre = (e) => {
     e.preventDefault();
-    console.log(genre);
     let response = fetch("http://localhost:8080/movies/genres", {
       method: "POST",
       headers: { "Content-Type": "application/json"},
@@ -51,7 +49,6 @@ export default function AddMovie() {
 
   const handleSubmitLanguage = (e) => {
     e.preventDefault();
-    console.log(language);
     fetch("http://localhost:8080/movies/languages", {
       method: "POST",
       headers: { "Content-Type": "application/json"},

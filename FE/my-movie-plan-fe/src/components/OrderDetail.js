@@ -24,7 +24,6 @@ export default function OrderDetail() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setOrder(data);
       });
   }, []);
@@ -35,13 +34,10 @@ export default function OrderDetail() {
         await fetch("http://localhost:8080/movies/" + item.mid)
           .then((res) => res.json())
           .then((result) => {
-            console.log({ result });
             setMovies((prevState) => [...prevState, result]);
           })
     );
   }, [order]);
-
-  console.log({ movies });
 
   if (movies.length > 0 && order !== undefined && order.createdby === name) {
     return (
@@ -58,7 +54,6 @@ export default function OrderDetail() {
             </p>
             {order.items.map((item) => {
               const movie = movies.find((movie) => movie.mid === item.mid);
-              console.log({ movie });
               return movie ? (
                 <div key={item.iid} className="row mb-3 text-center">
                   <div className="col-6">
@@ -82,7 +77,6 @@ export default function OrderDetail() {
             </div>
           </div>
         </div>
-
         <button
           onClick={() => navigate(-1)}
           type="button"

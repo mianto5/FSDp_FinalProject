@@ -15,13 +15,11 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
     fetch("http://localhost:8080/register", {
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify(user),
     }).then((response) => {
-      console.log(response);
       if(response.ok) {
         navigate("/login/user");
       }else{

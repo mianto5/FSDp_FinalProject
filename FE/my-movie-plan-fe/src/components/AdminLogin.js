@@ -12,7 +12,6 @@ export default function AdminLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(admin);
     fetch("http://localhost:8080/login/admin", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -21,8 +20,6 @@ export default function AdminLogin() {
       if(response.ok) {
         sessionStorage.setItem("name", admin.name);
         sessionStorage.setItem("role", "admin");
-        console.log(sessionStorage.getItem("name"));
-        console.log(sessionStorage.getItem("role"));
         navigate("/movies");
       }else{
         alert("Invalid credentials.");

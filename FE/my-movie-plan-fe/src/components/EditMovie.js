@@ -32,7 +32,6 @@ export default function EditMovie() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(movie);
     fetch("http://localhost:8080/movies/edit/"+mid, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

@@ -34,20 +34,15 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login/admin")
-	public String validateAdmin(@RequestBody Credentials admin, HttpSession session){
-		System.out.println("Adminname: "+admin.getName());
-		System.out.println("Adminpassword: "+admin.getPassword());
+	public void validateAdmin(@RequestBody Credentials admin, HttpSession session){
 		if(adminService.validateAdmin(admin.getName(), admin.getPassword())) {
 			session.setAttribute("name", admin.getName());
 			session.setAttribute("role", "admin");
 		}
-		return "XXX";
 	}
 	
 	@PostMapping("/login/user")
 	public void validateUser(@RequestBody Credentials user, HttpSession session){
-		System.out.println("Username: "+user.getName());
-		System.out.println("Userpassword: "+user.getPassword());
 		if(userService.validateUser(user.getName(), user.getPassword())) {
 			session.setAttribute("name", user.getName());
 			session.setAttribute("role", "user");
@@ -56,13 +51,11 @@ public class LoginController {
 	
 	@PostMapping("/register")
 	public void register(@RequestBody User user) throws Exception {
-		System.out.println("User name: "+user.getUsername());
 		userService.register(user);
 	}
 	
 	@GetMapping("/logout")
 	public void logout(HttpSession session) {
-		System.out.println("logout page");
 		session.removeAttribute("name");
 		session.removeAttribute("role");
 		session.invalidate();

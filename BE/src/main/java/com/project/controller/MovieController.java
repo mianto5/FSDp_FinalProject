@@ -64,36 +64,28 @@ public class MovieController {
 	}
 	
 	@PostMapping("/add")
-	public String addMovie(@RequestBody Movie movie) {
-		System.out.println("Movie name: "+movie.getMoviename());
+	public void addMovie(@RequestBody Movie movie) {
 		movieService.addMovie(movie);
-		return "YYY";
 	}
 	
 	@PutMapping("/edit/{mid}")
-	public String editMovie(@RequestBody Movie movie) {
-		System.out.println("Movie ID: "+movie.getMid());
+	public void editMovie(@RequestBody Movie movie) {
 		movieService.editMovie(movie);
-		return "YYY";
 	}
 	
 	@DeleteMapping("/delete/{mid}")  
 	private void deleteBook(@PathVariable String mid) {  
-	movieService.deleteMovie(mid);  
+		movieService.deleteMovie(mid);  
 	} 
 	
 	@PostMapping("/genres")
-	public String addGenre(@RequestBody Genre genre) {
-		System.out.println("Genre name: "+genre.getGenre());
+	public void addGenre(@RequestBody Genre genre) {
 		genreService.addGenre(genre);
-		return "YYY";
 	}
 	
 	@PostMapping("/languages")
-	public String addLanguage(@RequestBody Language language) {
-		System.out.println("Language name: "+language.getLanguage());
+	public void addLanguage(@RequestBody Language language) {
 		languageService.addLanguage(language);
-		return "YYY";
 	}
 	
 }

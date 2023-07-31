@@ -34,7 +34,6 @@ export default function OrderSummary() {
         await fetch("http://localhost:8080/movies/" + item.mid)
           .then((res) => res.json())
           .then((result) => {
-            console.log({ result });
             setMovies((prevState) => [...prevState, result]);
           })
     );
@@ -57,7 +56,6 @@ export default function OrderSummary() {
             <br></br>
             {order.items.map((item) => {
               const movie = movies.find((movie) => movie.mid === item.mid);
-              console.log({ movie });
               return movie ? (
                 <div key={item.iid} className="row mb-3 text-center">
                   <div className="col-6">
