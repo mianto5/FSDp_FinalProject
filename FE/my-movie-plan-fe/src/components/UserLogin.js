@@ -33,13 +33,14 @@ export default function UserLogin() {
   return (
     <div className="container px-4 px-lg-5">
       <div className="row gx-4 gx-lg-5 align-items-center my-5">
-        <h3>Log in to purchase tickets</h3>
+        <h3 id="titLogin">Log in to purchase tickets</h3>
         <p></p>
         <div className="col-md-6">
           <form>
             <div className="mb-3">
-              <label className="form-label">User's Name:</label>{" "}
+              <label className="form-label" style={{ color: "#eb0216" }}>Username:</label>{" "}
               <input
+                id="boxUsername"
                 type="text"
                 className="form-control"
                 name="name"
@@ -50,8 +51,9 @@ export default function UserLogin() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Password:</label>{" "}
+              <label className="form-label" style={{ color: "#eb0216" }}>Password:</label>{" "}
               <input
+                id="boxPassword"
                 type="password"
                 className="form-control"
                 name="password"
@@ -62,6 +64,7 @@ export default function UserLogin() {
               />
             </div>
             <button
+              id="btnLogin"
               type="submit"
               className="btn"
               style={{ backgroundColor: "#C20605", color: "white" }}
@@ -73,6 +76,7 @@ export default function UserLogin() {
           <div className="text-center">
             <p></p>
             <NavLink
+              id="linkRegister"
               className="nav-link"
               style={{ textDecoration: "underline", color: "white" }}
               to={"/register"}

@@ -39,9 +39,10 @@ export default function Register() {
           <form>
             <div className="mb-3">
               <label className="form-label" style={{ color: "#eb0216" }}>
-                Username:
+                Username (must be unique):
               </label>{" "}
               <input
+                id="boxUsername"
                 type="text"
                 className="form-control"
                 name="username"
@@ -56,6 +57,7 @@ export default function Register() {
                 First Name:
               </label>{" "}
               <input
+                id="boxFname"
                 type="text"
                 className="form-control"
                 name="fname"
@@ -70,6 +72,7 @@ export default function Register() {
                 Last Name:
               </label>{" "}
               <input
+                id="boxLname"
                 type="text"
                 className="form-control"
                 name="lname"
@@ -84,6 +87,7 @@ export default function Register() {
                 Email:
               </label>{" "}
               <input
+                id="boxEmail"
                 type="email"
                 className="form-control"
                 name="email"
@@ -98,6 +102,7 @@ export default function Register() {
                 Password:
               </label>{" "}
               <input
+                id="boxPassword"
                 type="password"
                 className="form-control"
                 name="userpassword"
@@ -108,6 +113,7 @@ export default function Register() {
               />
             </div>
             <button
+              id="btnRegister"
               type="submit"
               className="btn"
               style={{ backgroundColor: "#C20605", color: "white" }}

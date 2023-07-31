@@ -40,7 +40,7 @@ export default function Movies() {
   return (
     <div className="container px-4 px-lg-5">
       <div className="row gx-4 gx-lg-5 align-items-center my-5">
-        <h3>Available Movies</h3>
+        <h3 id="titMovies">Available Movies</h3>
         {role === "admin" && (
           <div className="text-center">
             <NavLink
