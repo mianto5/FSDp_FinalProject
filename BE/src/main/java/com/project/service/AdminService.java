@@ -16,17 +16,17 @@ public class AdminService {
 		return adminRepo.findByAdminname(adminname);
 	}
 	
-	public boolean validateAdmin(String name, String password) {
+	public boolean validateAdmin(String name, String password) throws Exception {
 		Admin admin = new Admin();
 		try {
 			admin = getAdminByName(name);
 		}catch(Exception e) {
-			return false;
+			throw new Exception("Invalid credentials.");
 		}
 		if(admin.getAdminpassword().equals(password))
 			return true;
 		else
-			return false;
+			throw new Exception("Invalid credentials.");
 	}
 
 }

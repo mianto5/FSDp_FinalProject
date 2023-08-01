@@ -16,17 +16,17 @@ public class UserService {
 		return userRepo.findByUsername(username);
 	}
 	
-	public boolean validateUser(String name, String password) {
+	public boolean validateUser(String name, String password) throws Exception {
 		User user = new User();
 		try {
 			user = getUserByName(name);
 		}catch(Exception e) {
-			return false;
+			throw new Exception("Invalid credentials.");
 		}
 		if(user.getUserpassword().equals(password))
 			return true;
 		else
-			return false;
+			throw new Exception("Invalid credentials.");
 	}
 	
 	public User register(User user) throws Exception {

@@ -34,7 +34,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login/admin")
-	public void validateAdmin(@RequestBody Credentials admin, HttpSession session){
+	public void validateAdmin(@RequestBody Credentials admin, HttpSession session) throws Exception{
 		if(adminService.validateAdmin(admin.getName(), admin.getPassword())) {
 			session.setAttribute("name", admin.getName());
 			session.setAttribute("role", "admin");
@@ -42,7 +42,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login/user")
-	public void validateUser(@RequestBody Credentials user, HttpSession session){
+	public void validateUser(@RequestBody Credentials user, HttpSession session) throws Exception{
 		if(userService.validateUser(user.getName(), user.getPassword())) {
 			session.setAttribute("name", user.getName());
 			session.setAttribute("role", "user");
